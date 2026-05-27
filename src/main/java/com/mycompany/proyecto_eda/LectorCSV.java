@@ -47,4 +47,32 @@ public class LectorCSV {
         }
         return ids;
     }
+    
+    public List<Juego> leerJuegos() throws IOException {
+        List<Juego> juegos = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+
+            br.readLine(); // Saltar encabezado
+
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                if (linea.isBlank()) continue;
+
+                try {
+                    String[] partes = linea.split(",", -1);
+
+                    String id    = partes[0].trim();
+                    String slug  = partes[1].trim();
+                    String name  = partes[2].trim();
+                    Integer metacritic = partes[3].trim().isEmpty() ? null : Integer.parseInt(partes[3].trim());
+                    int playtime = partes[6].trim().isEmpty() ? 0 : Integer.parseInt(partes[6].trim());
+
+                    juegos.add(new Juego(id, slug, name, metacritic, playtime));
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    continue; // Fila con formato inválido, se omite
+                }
+            }
+        }
+        return juegos;
+    }
 }
