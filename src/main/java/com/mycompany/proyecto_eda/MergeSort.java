@@ -4,16 +4,20 @@ import java.util.ArrayList;
 
 public class MergeSort {
 
+    // Divide recursivamente la lista en mitades hasta tener elementos individuales
     public static void sort(ArrayList<Juego> lista, int inicio, int fin) {
         if (inicio < fin) {
-            int medio = (inicio + fin) / 2;
-            sort(lista, inicio, medio);
-            sort(lista, medio + 1, fin);
-            merge(lista, inicio, medio, fin);
+            int medio = (inicio + fin) / 2; // Punto de división de la lista
+            sort(lista, inicio, medio);     // Punto de división de la lista
+            sort(lista, medio + 1, fin);    // Ordenar mitad derecha
+            merge(lista, inicio, medio, fin);// Fusionar ambas mitades ordenadas
         }
     }
 
+    // Fusiona dos sublistas ordenadas en una sola, de mayor a menor metacritic
     private static void merge(ArrayList<Juego> lista, int inicio, int medio, int fin) {
+        
+        // Copiar los elementos de cada mitad en sublistas temporales
         ArrayList<Juego> izquierda = new ArrayList<>();
         ArrayList<Juego> derecha = new ArrayList<>();
 
@@ -24,14 +28,16 @@ public class MergeSort {
 
         int i = 0, j = 0, k = inicio;
 
+        // Comparar elemento a elemento y colocar el mayor primero
         while (i < izquierda.size() && j < derecha.size()) {
             if (izquierda.get(i).getMetacritic() >= derecha.get(j).getMetacritic()) {
-                lista.set(k++, izquierda.get(i++));
+                lista.set(k++, izquierda.get(i++));// El de la izquierda es mayor o igual
             } else {
-                lista.set(k++, derecha.get(j++));
+                lista.set(k++, derecha.get(j++));   // El de la derecha es mayor
             }
         }
 
+        // Vaciar los elementos restantes de cada sublista
         while (i < izquierda.size()) lista.set(k++, izquierda.get(i++));
         while (j < derecha.size()) lista.set(k++, derecha.get(j++));
     }
