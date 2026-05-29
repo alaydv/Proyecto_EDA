@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author mateo
  */
 public class SondeoCuadratico {
- 
+    
     private static final int TAMANO_TABLA = 70003; // Numero primo escogido para la tabla hash
     private static final int MAX_INTENTOS = 5;     // Maximo de saltos cuadraticos permitidos
  
@@ -24,13 +24,13 @@ public class SondeoCuadratico {
     static int hashAuxiliar(int num) {
         return num % TAMANO_TABLA;
     }
- 
+    
     // Posicion con sondeo cuadratico: (posInicial + salto²) % tamano
     // salto=0 -> sin colision, salto>0 -> hubo colision
     static int hashPrincipal(int num, int salto) {
         return (hashAuxiliar(num) + salto * salto) % TAMANO_TABLA;
     }
- 
+    
     // Inserta un ID aplicando sondeo cuadratico
     public void insertar(int num) {
         for (int salto = 0; salto < MAX_INTENTOS; salto++) {

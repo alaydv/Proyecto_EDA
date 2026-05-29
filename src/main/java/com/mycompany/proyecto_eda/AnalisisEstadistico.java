@@ -11,7 +11,7 @@ public class AnalisisEstadistico {
     public static void top10Juegos(ArrayList<String[]> juegos) {
 
     System.out.println("============================================");
-    System.out.println("  TOP 10 JUEGOS MAS POPULARES (owned)      ");
+    System.out.println(" TOP 10 JUEGOS MAS POPULARES DE ACUERDO A LA DESCARGA (owned) ");
     System.out.println("============================================");
 
     // Solo busca el top 10, no ordena toda la lista
